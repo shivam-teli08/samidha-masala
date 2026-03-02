@@ -47,6 +47,10 @@ const orderController = async (req, res) => {
       notes: { orderId: order._id.toString() },
       notify: { sms: false, email: false },
       reminder_enable: false,
+      callback_url: `${
+        process.env.FRONTEND_URL || "http://localhost:5173"
+      }/payment/callback?orderId=${order._id}`,
+      callback_method: "get",
     });
 
     order.razorpayPaymentLinkId = paymentLink.id;
@@ -65,6 +69,26 @@ const orderController = async (req, res) => {
   }
 };
 
+const getOrderById = async (req, res) => {
+  try {
+    const { orderId } = req.params;
+    const order = await Order.findById(orderId);
+
+    if (!order) {
+      return res.status(404).json({ message: "Order not found" });
+    }
+
+    if (order.user.toString() !== req.user._id.toString()) {
+      return res.status(403).json({ message: "Access denied" });
+    }
+
+    return res.status(200).json({ success: true, order });
+  } catch (err) {
+    return res.status(500).json({ message: "Unable to fetch order" });
+  }
+};
+
 module.exports = {
   orderController,
+  getOrderById,
 };

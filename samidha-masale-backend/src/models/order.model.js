@@ -47,6 +47,10 @@ const orderSchema = new mongoose.Schema(
       type: String,
       default: null,
     },
+    razorpayPaymentLinkId: {
+      type: String,
+      default: null,
+    },
     razorpayPaymentId: {
       type: String,
       default: null,

@@ -1,0 +1,18 @@
+:root {
+  --font-heading: 'Poppins', 'Segoe UI', sans-serif;
+  --font-body: 'Manrope', 'Segoe UI', sans-serif;
+
+  --bg-main: #f6f3ec;
+  --bg-card: #fffdf9;
+  --text-primary: #23201d;
+  --text-secondary: #5f5952;
+  --brand: #c76a2a;
+  --brand-deep: #8d3f11;
+  --success: #0f8a54;
+  --danger: #bf2f3c;
+  --border: #e4dacd;
+
+  font-family: var(--font-body);
+  color: var(--text-primary);
+  background: var(--bg-main);
+}
